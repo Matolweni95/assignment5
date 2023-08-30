@@ -1,0 +1,16 @@
+.edit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questions {
+    display: flex;
+    gap: 12px;
+}
+
+.edit-btn {
+    display: flex;
+    gap: 8px;
+}

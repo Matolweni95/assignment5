@@ -1,0 +1,35 @@
+.login {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding: 25px 0px;
+    gap: 15px;
+    width: 350px;
+    border-radius: 9px;
+    flex-direction: column;
+}
+
+.signin-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-text {
+    border: 1px solid black;
+    padding: 15px 25px;
+    border-radius: 5px;
+}
+
+button {
+    width: 100px;
+}

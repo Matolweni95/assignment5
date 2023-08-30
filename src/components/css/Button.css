@@ -1,0 +1,7 @@
+.signOut {
+    padding: 10px 25px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
