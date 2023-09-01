@@ -50,48 +50,46 @@ function Create() {
     
 
   async function insertDataIntoDatabase() {
-    const dataToInsert = dataList.map(item => {
-        return {
-          text: item.text, 
-        };
-    });
-
-    const { data: insertData, error: insertError } = await supabase.from('questionnaire').insert({
-      user_id: id,
-      title: heading,
-      description: desc
-    });
-
-    if (insertError) {
-      console.error('Error inserting into questionnaire:', insertError);
-    } else {
-     window.location.href = "/dashboard";
-
-      const { data: fetchedQuestionnaire, error: fetchError } = await supabase
-      .from('questionnaire')
-      .select('questionnaire_id')
-      .order('questionnaire_id', { ascending: false })
-      .limit(1)
-          if (fetchError) {
-              console.error('Error fetching questionnaire data:', fetchError);
-          } else {
-              const insertedQuestionnaireID = fetchedQuestionnaire[0].questionnaire_id;
-              console.log(insertedQuestionnaireID)
+    try {
+      
+      const { data: insertData, error: insertError } = await supabase.from('questionnaire').insert({
+        user_id: id,
+        title: heading,
+        description: desc
+      });
   
-              const { data: questionInsertData, error: questionInsertError } = await supabase.from('questions').insert(
-                dataToInsert.map(item => {
-                    return {
-                        questionnaire_id: insertedQuestionnaireID,
-                        question: item.text
-                    };
-                })
-            );
-          }
-        }
+      if (insertError) {
+        console.error('Error inserting into questionnaire:', insertError);
+        return;
       }
+  
+      const { data: fetchedQuestionnaire, error: fetchError } = await supabase
+        .from('questionnaire')
+        .select('questionnaire_id')
+        .order('questionnaire_id', { ascending: false })
+        .limit(1);
+  
+      if (fetchError) {
+        console.error('Error fetching questionnaire data:', fetchError);
+        return;
+      }
+  
+      const insertedQuestionnaireID = fetchedQuestionnaire[0].questionnaire_id;
+      console.log(insertedQuestionnaireID);
 
-    
-
+      const dataToInsert = dataList.map(item => ({
+        questionnaire_id: insertedQuestionnaireID,
+        question: item.text
+      }));
+      
+      const { data: questionInsertData, error: questionInsertError } = await supabase.from('questions').insert(dataToInsert);
+  
+      window.location.href = "/dashboard";
+    } catch (error) {
+      console.error('An unexpected error occurred:', error);
+    }
+  }
+      
   return (
     <div>
       <Navbar />

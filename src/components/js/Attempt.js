@@ -12,6 +12,7 @@ function Attempt() {
     const location = useLocation();
     const { questionnaire } = location.state;
     const id = questionnaire.questionnaire_id
+    console.log(id)
     localStorage.setItem('questionnaireID', JSON.stringify({ ID: id}));
 
 
@@ -26,9 +27,10 @@ function Attempt() {
                     console.log('error fetching data:', error.message)
                   } else {
                     setQuestions(data)
-                    
+                    console.log(questions)
                   }
                 } catch (error) {
+                    alert('failed to fetch')
                   
             }
         }
@@ -44,6 +46,7 @@ function Attempt() {
                 res: value
             },
         });
+        
     };
 
     const handleSubmit = (event) => {
