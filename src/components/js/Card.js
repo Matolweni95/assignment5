@@ -3,9 +3,12 @@ import '../css/Card.css';
 import Button from './Button';
 import { supabase } from './supabase'; 
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Card = () => {
   const [questionnaires, setQuestionnaires] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchQuestionnaires() {
@@ -21,6 +24,8 @@ const Card = () => {
       }
     }
 
+    console.log(questionnaires)
+
     fetchQuestionnaires();
   }, []);
 
@@ -33,9 +38,9 @@ const Card = () => {
               <h1>{questionnaire.title}</h1>
               <h3>Description:</h3>
               <p>{questionnaire.description}</p>
-              <Link to="/attempt">
-                <Button />
-              </Link>
+              <button onClick={() => navigate('/attempt', {state: {questionnaire:questionnaire}})}>
+                Attempt
+              </button>
             </div>
           </div>
         ))

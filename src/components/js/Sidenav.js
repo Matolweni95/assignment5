@@ -28,7 +28,7 @@ const Sidenav = (props) => {
                     <Link to = "/create">
                         Create Questionnaire
                     </Link>
-                    <Link to = "/results">
+                    <Link to = "/analytics">
                         Analytics
                     </Link>
                 </ul>

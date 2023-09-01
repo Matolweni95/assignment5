@@ -1,14 +1,94 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Sidenav from './Sidenav';
-import '../css/Attempt.css'
+import '../css/Attempt.css';
+import { useLocation } from 'react-router-dom';
+import { supabase } from './supabase';
 
 function Attempt() {
+
+    const [questions, setQuestions] = useState([]);
+    const [responses, setResponses] = useState({});
+    const location = useLocation();
+    const { questionnaire } = location.state;
+    const id = questionnaire.questionnaire_id
+    localStorage.setItem('questionnaireID', JSON.stringify({ ID: id}));
+
+
+    useEffect (() => {
+        async function fetchQuestion (){
+            try {
+                const {data, error} = await supabase
+                .from('questions')
+                .select('*')
+                .eq('questionnaire_id', id)
+                if(error){
+                    console.log('error fetching data:', error.message)
+                  } else {
+                    setQuestions(data)
+                    
+                  }
+                } catch (error) {
+                  
+            }
+        }
+
+        fetchQuestion()
+    }, []) 
+
+    const handleRadioChange = (questionId, value) => {
+        setResponses({
+            ...responses,
+            [questionId]: {
+                id : questionId,
+                res: value
+            },
+        });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault(); 
+        const mappedResponses = Object.values(responses);
+        console.log(mappedResponses);
+
+        const inserData = async() => {
+        const questionnaireData = localStorage.getItem('questionnaireID');
+        const questionData = JSON.parse(questionnaireData);
+        const questionaaire_id = questionData.ID;
+
+        const userID = localStorage.getItem('userData');
+        const Data = JSON.parse(userID);
+        const setID = Data.userID;
+            
+        const { data, error } =  await supabase
+            .from('responses')
+            .insert(mappedResponses.map(({ id, res, question, user }) => ({
+                question_id: id,
+                response: res,
+                questionnaire_id: questionaaire_id,
+                user_id: setID
+            }))
+
+            
+        );
+
+        if (!error) {
+            localStorage.removeItem('questionnaireID')
+            window.location.href = "/dashboard"
+        }else {
+            alert('Sorry there was a problem inserting data')
+        }
+    }
+
+        inserData()
+    };
+
   return (
+    
     <div>   
         <Navbar />
         <Sidenav>
-        <form>
+        <form onSubmit={handleSubmit}>
             <table>
             <thead>
                 <tr>
@@ -17,97 +97,60 @@ function Attempt() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>How satisfied are you?</td>
-                <td>
-                    <div class="radio-button-container">
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio1" name="question1" value="Agree"/>
-                        <label class="radio-button__label" for="radio1">
-                            <span class="radio-button__custom"></span>
-                            Agree
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio2" name="question1" value="Neutral"/>
-                        <label class="radio-button__label" for="radio2">
-                            <span class="radio-button__custom"></span>
-                            Neutral
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio3" name="question1" value="Disagree"/>
-                        <label class="radio-button__label" for="radio3">
-                            <span class="radio-button__custom"></span>
-                            Disagree
-                        </label>
-                    </div>
-                    </div>
-                </td>
+            {questions.map((item, index) => (
+                <tr key={index}>
+                    <td>{item.question}</td>
+                    <td>
+                        <div className="radio-button-container">
+                            <div className="radio-button">
+                                <input
+                                    type="radio"
+                                    className="radio-button__input"
+                                    id={`radio-${item.question_id}-agree`}
+                                    name={`question-${item.question_id}`} 
+                                    value="Agree"
+                                    onChange={() => handleRadioChange(item.question_id, 'Agree')}
+                                />
+                                <label className="radio-button__label" htmlFor={`radio-${item.question_id}-agree`}>
+                                    <span className="radio-button__custom"></span>
+                                    Agree
+                                </label>
+                            </div>
+                            <div className="radio-button">
+                                <input
+                                    type="radio"
+                                    className="radio-button__input"
+                                    id={`radio-${item.question_id}-neutral`}
+                                    name={`question-${item.question_id}`} 
+                                    value="Neutral"
+                                    onChange={() => handleRadioChange(item.question_id, 'Neutral')}
+                                />
+                                <label className="radio-button__label" htmlFor={`radio-${item.question_id}-neutral`}>
+                                    <span className="radio-button__custom"></span>
+                                    Neutral
+                                </label>
+                            </div>
+                            <div className="radio-button">
+                                <input
+                                    type="radio"
+                                    className="radio-button__input"
+                                    id={`radio-${item.question_id}-disagree`}
+                                    name={`question-${item.question_id}`} 
+                                    value="Disagree"
+                                    onChange={() => handleRadioChange(item.question_id, 'Disagree')}
+                                />
+                                <label className="radio-button__label" htmlFor={`radio-${item.question_id}-disagree`}>
+                                    <span className="radio-button__custom"></span>
+                                    Disagree
+                                </label>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
-
-                <tr>
-                <td>How satisfied are you?</td>
-                <td>
-                    <div class="radio-button-container">
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio4" name="question2" value="Agree"/>
-                        <label class="radio-button__label" for="radio4">
-                            <span class="radio-button__custom"></span>
-                            Agree
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio5" name="question2" value="Neutral"/>
-                        <label class="radio-button__label" for="radio5">
-                            <span class="radio-button__custom"></span>
-                            Neutral
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio6" name="question2" value="Disagree"/>
-                        <label class="radio-button__label" for="radio6">
-                            <span class="radio-button__custom"></span>
-                            Disagree
-                        </label>
-                    </div>
-                    </div>
-                </td>
-                </tr>
-
-                <tr>
-                <td>How satisfied are you?</td>
-                <td>
-                    <div class="radio-button-container">
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio7" name="question3" value="Agree"/>
-                        <label class="radio-button__label" for="radio7">
-                            <span class="radio-button__custom"></span>
-                            Agree
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio8" name="question3" value="Neutral"/>
-                        <label class="radio-button__label" for="radio8">
-                            <span class="radio-button__custom"></span>
-                            Neutral
-                        </label>
-                    </div>
-                    <div class="radio-button">
-                        <input type="radio" class="radio-button__input" id="radio9" name="question3" value="Disagree"/>
-                        <label class="radio-button__label" for="radio9">
-                            <span class="radio-button__custom"></span>
-                            Disagree
-                        </label>
-                    </div>
-                    </div>
-                </td>
-                </tr>
-                
+            ))}
             </tbody>
             </table>
-    
-            <button type='submit'>Submit</button>
+            <button onClick={handleSubmit}>Submit</button>
         </form>
         </Sidenav>
     </div>

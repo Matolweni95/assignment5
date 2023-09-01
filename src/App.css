@@ -149,3 +149,7 @@ body {
     color: #ffdd40;
   }
 }
+
+@media screen and (min-width: 1200px) { 
+  
+}

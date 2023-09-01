@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from './supabase';
 
 
+
 const Editcard = () => {
+
+const navigate = useNavigate();
 
 const [questionnaire, setQuestionnaires] = useState([]);
 const userData = JSON.parse(localStorage.getItem('userData'));
@@ -50,18 +53,6 @@ const userData = JSON.parse(localStorage.getItem('userData'));
                 <h2>{questionnaire.title}</h2>
                 <h3>{questionnaire.description}</h3>
                 <div className='crud'>
-                        <Link to = "/edit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                                    <g clipPath="url(#clip0_3_284)">
-                                        <path d="M21.1944 2.41742L19.5826 0.805664C19.0459 0.268555 18.3421 0 17.6383 0C16.9345 0 16.2306 0.268555 15.6935 0.805234L0.552191 15.9466L0.00648821 20.8545C-0.0622618 21.4723 0.424574 22 1.02914 22C1.06739 22 1.10563 21.9979 1.14473 21.9936L6.04918 21.4517L21.1948 6.30609C22.2686 5.2323 22.2686 3.49121 21.1944 2.41742ZM5.41797 20.1386L1.42059 20.5816L1.86575 16.5782L13.2048 5.23918L16.7613 8.7957L5.41797 20.1386ZM20.2224 5.33414L17.7333 7.82332L14.1767 4.2668L16.6659 1.77762C16.9254 1.51809 17.2709 1.375 17.6383 1.375C18.0057 1.375 18.3507 1.51809 18.6107 1.77762L20.2224 3.38937C20.7583 3.92562 20.7583 4.79789 20.2224 5.33414Z" fill="#164B60"/>
-                                    </g>
-                                <defs>
-                                    <clipPath id="clip0_3_284">
-                                        <rect width="22" height="22" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                                </svg>
-                        </Link>
                         <a onClick={() => handleDelete(questionnaire.questionnaire_id)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="23" height="25" viewBox="0 0 23 25" fill="none">
                                     <g clipPath="url(#clip0_3_288)">
@@ -72,7 +63,7 @@ const userData = JSON.parse(localStorage.getItem('userData'));
                                         <rect width="23" height="25" fill="white" transform="matrix(-1 0 0 1 23 0)"/>
                                     </clipPath>
                                 </defs>
-                                </svg>
+                            </svg>
                         </a>
                     </div>
                 </div>

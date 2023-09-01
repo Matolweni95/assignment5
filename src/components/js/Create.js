@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import Sidenav from './Sidenav';
 import { supabase } from './supabase';
 
+
+
 function Create() {
   const [inputData, setInputData] = useState('');
   const [dataList, setDataList] = useState([]);
@@ -37,9 +39,15 @@ function Create() {
     e.preventDefault();
     handleFormSubmit(inputData);
     setInputData('');
+ 
   };
 
-  const userData = JSON.parse(localStorage.getItem('userData'));
+  const userData = localStorage.getItem('userData');
+  const user = JSON.parse(userData);
+  const username = user.username;
+  const id = user.userID
+        
+    
 
   async function insertDataIntoDatabase() {
     const dataToInsert = dataList.map(item => {
@@ -49,7 +57,7 @@ function Create() {
     });
 
     const { data: insertData, error: insertError } = await supabase.from('questionnaire').insert({
-      user_id: userData.userID,
+      user_id: id,
       title: heading,
       description: desc
     });
@@ -70,27 +78,24 @@ function Create() {
               const insertedQuestionnaireID = fetchedQuestionnaire[0].questionnaire_id;
               console.log(insertedQuestionnaireID)
   
-              // Step 3: Insert each question into the 'questions' table using the fetched questionnaire ID
-              // for (const item of dataToInsert) {
-              //     const { data: questionInsertData, error: questionInsertError } = await supabase.from('questions').insert({
-              //         questionnaire_id: insertedQuestionnaireID,
-              //         question: item.text
-              //     });
-  
-              //     if (questionInsertError) {
-              //         console.error('Error inserting into questions:', questionInsertError);
-              //     } else {
-              //         console.log('Data inserted into questions:', questionInsertData);
-              //     }
-              // }
-            }
+              const { data: questionInsertData, error: questionInsertError } = await supabase.from('questions').insert(
+                dataToInsert.map(item => {
+                    return {
+                        questionnaire_id: insertedQuestionnaireID,
+                        question: item.text
+                    };
+                })
+            );
           }
         }
+      }
+
+    
 
   return (
     <div>
       <Navbar />
-      <Sidenav>
+      <Sidenav username = {username}>
         <div>
           <div className='form-container'>
             <h1>Create Questionnaire</h1>

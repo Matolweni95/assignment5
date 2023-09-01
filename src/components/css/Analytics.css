@@ -1,0 +1,42 @@
+.analytics {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.chart-card {
+    border-radius: 30px;
+    background: whitesmoke;
+    box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+    padding: 15px;
+    width: 400px;
+    height: fit-content;
+}
+
+.cards-holder {
+    display: flex;
+    width: 500px;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+}
+
+.analytic-cards {
+    border-radius: 30px;
+    background: whitesmoke;
+    box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+    padding: 15px;
+    width: 180px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.role {
+    width: 400px !important;
+    height: 400px !important;
+}
