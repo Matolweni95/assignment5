@@ -5,15 +5,15 @@ import Navbar from './Navbar';
 import Sidenav from './Sidenav';
 
 import Editcard from './Editcard';
-const userData = localStorage.getItem('userData');
-const user = JSON.parse(userData);
-const username = user.username;
+// const userData = localStorage.getItem('userData');
+// const user = JSON.parse(userData?? 'null');
+// const username = user.username;
 
 const Questionnaire = () => {
     return (
         <div>   
             <Navbar />
-            <Sidenav username={username}>
+            <Sidenav >
                 <Editcard />
             </Sidenav>    
         </div>

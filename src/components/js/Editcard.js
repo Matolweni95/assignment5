@@ -36,7 +36,8 @@ const userData = JSON.parse(localStorage.getItem('userData'));
             const { data, error } = await supabase
             .from('questionnaire')
             .delete()
-            .match({'id':id})
+            .match({'questionnaire_id':id})
+            window.location.reload()
     
         } catch (error) {
             console.log('fail');

@@ -65,7 +65,7 @@ function Create() {
     if (insertError) {
       console.error('Error inserting into questionnaire:', insertError);
     } else {
-      console.log('Data inserted into questionnaire');
+     window.location.href = "/dashboard";
 
       const { data: fetchedQuestionnaire, error: fetchError } = await supabase
       .from('questionnaire')

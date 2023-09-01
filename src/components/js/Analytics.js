@@ -18,7 +18,6 @@ function Analytics() {
     const userdata = JSON.parse(user)
     const username = userdata.username;
     const user_ID = userdata.userID;
-    console.log(userdata)
 
     const [responseData, setResponseData] = useState({
         agree: 0,

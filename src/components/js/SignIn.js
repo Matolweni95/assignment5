@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './supabase'
 import '../css/SignIn.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const SigninForm = () => {
   const [email, setEmail] = useState('');
@@ -10,14 +11,12 @@ const SigninForm = () => {
 
   const handleSignin = async () => {
     try {
-      // Fetch hashed password from your users table
+      
       const { data: users, error } = await supabase
         .from('users')
         .select('password, email, name, user_id')
         .eq('email', email)
         .single();
-
-        console.log (users)
 
       if (error) {
         console.error('Database error:', error.message);
@@ -67,6 +66,10 @@ const SigninForm = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleSignin}>Sign In</button>
+      <p>or</p>
+      <Link to = "/signup">
+        <button>Sign Up</button>
+      </Link>
       </div>
     </div>
   );

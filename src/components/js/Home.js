@@ -39,7 +39,6 @@ const Home = (prop) => {
     const userData = localStorage.getItem('userData');
     const user = JSON.parse(userData);
     const username = user.username;
-    console.log(username)
 
     return (
       <div className='card'>
