@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from './supabase';
+import '../css/signup.css';
+import { Link } from 'react-router-dom';
 
 const SignupForm = () => {
   const [username, setUsername] = useState('');
@@ -30,17 +32,20 @@ const SignupForm = () => {
   }
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className='signup'>
+      <div className='signupform-container'>
       <form onSubmit={handleSignup}>
+      <h2>Signup</h2>
         <input
           type="text"
+          className='signup-text'
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="email"
+          className='signup-text'
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -48,14 +53,16 @@ const SignupForm = () => {
         <input
           type="password"
           placeholder="Password"
+          className='signup-text'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit" onClick={() => signup()}>Signup</button>
-       
+        <Link to = "/">
+          <button className='back'>Back to Login</button>
+       </Link>
       </form>
-
-      
+      </div>  
     </div>
   );
 };

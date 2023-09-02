@@ -1,0 +1,29 @@
+.signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signupform-container {
+    background-color: white;
+    width: 300px;
+    border-radius: 25px;
+    box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+    padding: 25px;
+}
+
+form {
+    margin-top: unset ;
+}
+
+.signup-text {
+    border: 1px solid black;
+    padding: 15px 25px;
+    border-radius: 5px;
+}
+
+.back {
+    width: 150px;
+}
