@@ -77,7 +77,7 @@ function Attempt() {
 
         if (!error) {
             localStorage.removeItem('questionnaireID')
-            window.location.href = "/dashboard"
+            window.location.href = "/"
         }else {
             alert('Sorry there was a problem inserting data')
         }
@@ -108,6 +108,7 @@ function Attempt() {
                             <div className="radio-button">
                                 <input
                                     type="radio"
+                                    required
                                     className="radio-button__input"
                                     id={`radio-${item.question_id}-agree`}
                                     name={`question-${item.question_id}`} 
@@ -122,6 +123,7 @@ function Attempt() {
                             <div className="radio-button">
                                 <input
                                     type="radio"
+                                    required
                                     className="radio-button__input"
                                     id={`radio-${item.question_id}-neutral`}
                                     name={`question-${item.question_id}`} 
@@ -136,6 +138,7 @@ function Attempt() {
                             <div className="radio-button">
                                 <input
                                     type="radio"
+                                    required
                                     className="radio-button__input"
                                     id={`radio-${item.question_id}-disagree`}
                                     name={`question-${item.question_id}`} 

@@ -102,11 +102,13 @@ function Create() {
                 <label>Heading</label>
                 <input className='input heading' 
                 value={heading}
+                required
                 onChange={(e) => setHeading(e.target.value)}
                 type='text' />
                 <label>Description</label>
                 <textarea rows={3} className='input' 
                 value={desc}
+                required
                 onChange={(e) => setDesc(e.target.value)}
                 type='text' />
               </div>
@@ -114,6 +116,7 @@ function Create() {
                 type="text"
                 className='input'
                 placeholder='Add question'
+                required
                 value={inputData}
                 onChange={(e) => setInputData(e.target.value)}
               />
@@ -124,6 +127,7 @@ function Create() {
             <div className='result' key={item.id}>
               <input
                 type="text"
+                className='view'
                 value={item.text}
                 readOnly={!item.isEditing}
                 onChange={(e) => handleEditChange(item.id, e.target.value)}

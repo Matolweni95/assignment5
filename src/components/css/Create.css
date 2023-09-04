@@ -53,3 +53,7 @@ button {
     justify-content: center;
     overflow-y: auto;
 }
+
+.view {
+    width: 400px;
+}
