@@ -95,18 +95,18 @@ function Create() {
       <Navbar />
       <Sidenav username = {username}>
         <div>
-          <div className='form-container'>
+          <div className='form-container bg-custom p-4 rounded-lg mt-10'>
             <h1>Create Questionnaire</h1>
             <form onSubmit={handleSubmit}>
               <div className='form-description'>
                 <label>Heading</label>
-                <input className='input heading' 
+                <input className='input heading rounded' 
                 value={heading}
                 required
                 onChange={(e) => setHeading(e.target.value)}
                 type='text' />
                 <label>Description</label>
-                <textarea rows={3} className='input' 
+                <textarea rows={3} className='input rounded' 
                 value={desc}
                 required
                 onChange={(e) => setDesc(e.target.value)}
@@ -114,7 +114,7 @@ function Create() {
               </div>
               <input
                 type="text"
-                className='input'
+                className='input rounded'
                 placeholder='Add question'
                 required
                 value={inputData}
@@ -124,10 +124,10 @@ function Create() {
             </form>
           </div>
           {dataList.map(item => (
-            <div className='result' key={item.id}>
+            <div className='result bg-custom p-4 rounded-lg' key={item.id}>
               <input
                 type="text"
-                className='view'
+                className='view rounded'
                 value={item.text}
                 readOnly={!item.isEditing}
                 onChange={(e) => handleEditChange(item.id, e.target.value)}

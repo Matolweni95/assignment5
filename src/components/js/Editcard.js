@@ -49,8 +49,8 @@ const userData = JSON.parse(localStorage.getItem('userData'));
         <div>
         {questionnaire.length > 0 ? (
             questionnaire.map((questionnaire, index) => (
-                <div key={index} className='questionnaires'>
-                <div className='questionnair_card'>
+                <div key={index} className='questionnaires mt-12'>
+                <div className='questionnair_card flex flex-col bg-gray p-4 md:flex-row gap-10 text-left w-full rounded-lg'>
                 <h2>{questionnaire.title}</h2>
                 <h3>{questionnaire.description}</h3>
                 <div className='crud'>

@@ -84,17 +84,17 @@ function Analytics() {
     <div className='analytics-holder'>
         <Navbar />
         <Sidenav username = {username}>
-            <div className='analytics'>
-                <div className='cards-holder'>
-                    <div className='analytic-cards'>
+            <div className='analytics flex flex-col-reverse items-center justify-center lg:flex-row'>
+                <div className='cards-holder flex flex-wrap justify-around p-3 gap-8 mt-12 lg:w-1/2 lg:mt-0'>
+                    <div className='analytic-cards flex flex-col items-center '>
                         <h1>Agree</h1>
                         <h1>{responseData.agree}</h1>
                     </div>
-                    <div className='analytic-cards'>
+                    <div className='analytic-cards flex flex-col items-center'>
                         <h1>Disagree</h1>
                         <h1>{responseData.dis}</h1>
                     </div>
-                    <div className='analytic-cards'>
+                    <div className='analytic-cards flex flex-col items-center '>
                         <h1>Neutral</h1>
                         <h1>{responseData.neut}</h1>
                     </div>

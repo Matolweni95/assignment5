@@ -10,6 +10,7 @@ const SignupForm = () => {
 
   const handleSignup = (e) => {
     e.preventDefault();
+    signup();
     console.log('Signup submitted:', { username, password, email });
   };
 
@@ -32,38 +33,54 @@ const SignupForm = () => {
   }
 
   return (
-    <div className='signup'>
-      <div className='signupform-container'>
-      <form onSubmit={handleSignup}>
-      <h2>Signup</h2>
-        <input
-          type="text"
-          className='signup-text'
-          placeholder="Username"
+    <>
+    <div className='signin h-screen flex items-center justify-center'>
+    <div className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+      <div className="relative bg-cyan mx-4 -mt-6 mb-4 grid h-28 place-items-center overflow-hidden rounded-xl bg-gradient-to-tr from-cyan-600 to-cyan-400 bg-clip-border text-white shadow-lg shadow-cyan-500/40">
+        <h3 className="block font-sans text-3xl font-semibold leading-snug tracking-normal text-white antialiased">
+          Sign up
+        </h3>
+      </div>
+      <div className="flex flex-col gap-4 p-6">
+        <div className="relative h-11 w-full min-w-[200px]">
+          <input type='text' 
+          className='bg-gray w-full p-3 rounded-lg' 
+          placeholder='Username'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="email"
-          className='signup-text'
-          placeholder="Email"
+          />
+        </div>
+        <div className="relative h-11 w-full min-w-[200px]">
+          <input type='email' 
+          className='bg-gray w-full p-3 rounded-lg' 
+          placeholder='Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className='signup-text'
+          />
+        </div>
+        <div className="relative h-11 w-full min-w-[200px]">
+          <input type='password' 
+          className='bg-gray w-full p-3 rounded-lg' 
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" onClick={() => signup()}>Signup</button>
-        <Link to = "/">
-          <button className='back'>Back to Login</button>
-       </Link>
-      </form>
-      </div>  
+        </div>
+      </div>
+      <div className="p-6 pt-0">
+        <button
+          onClick={handleSignup}
+          data-ripple-light="true"
+          type="button"
+          className="block w-full select-none rounded-lg bg-cyan to-cyan-400 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-cyan-500/20 transition-all hover:shadow-lg hover:shadow-cyan-500/40 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        >
+          Sign Up
+        </button>
+        
+      </div>
     </div>
+  </div>
+  </>
   );
 };
 

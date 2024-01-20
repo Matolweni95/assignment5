@@ -18,7 +18,7 @@ const Sidenav = (props) => {
             </div>
             <li className="active">
                 
-                <ul className="collapse list-unstyled" id="homeSubmenu">
+                <ul className=" list-unstyled" id="homeSubmenu">
                     <Link to = "/dashboard">
                         Dashboard
                     </Link>
